@@ -2,7 +2,7 @@ Feature: placing the order
 
 Scenario: Browsing a unknown product 
     When I search a product "xyz"
-    Then I can see a message stated as "product not found"
+    And I can see a message stated as "product not found"
 
 Scenario Outline: Adding negative and high quantity of a item to the cart that exceeds the availability
     When I search a product "bottle"

@@ -121,6 +121,5 @@ Then('I have logged in to the home page', async function(){
 
 });
 
-module.exports = driver;
 
 

@@ -16,7 +16,7 @@ When('I search a product {string}', async function(product){
 
 });
 
-And('I can see the message as {string}', async function(){
+And('I can see a message as {string}', async function(){
 
     let check = false;
     let counter = 100;
@@ -35,4 +35,16 @@ And('I can see the message as {string}', async function(){
         }
     }
     throw new Error("Failed");
+});
+
+Then('I click on a particular item',async function(){
+
+    const pdt = await driver.wait(until.elementLocated(By.css('[data-testid="product1"]'))).click(); 
+    await new Promise(resolve => setTimeout(resolve,1000));
+
+});
+
+Then('I enter the number of product needed as {string}', async function(){
+    
+
 });
