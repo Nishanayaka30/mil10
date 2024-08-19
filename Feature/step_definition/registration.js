@@ -12,7 +12,7 @@ BeforeAll(async function(){
 });
 
 Given('I\'m on the home page', async function(){
-    await driver.get('https://practicesoftwaretesting.com/');
+    await driver.get('https://ecommerce-site.com/home');
 
 });
 
