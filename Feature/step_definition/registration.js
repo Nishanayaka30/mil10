@@ -1,6 +1,5 @@
 import {Given,When,Then,BeforeAll,AfterAll} from "@cucumber/cucumber"
 import {builder, By,until,Key} from "selenium-webdriver"
-//import assert from "chai"
 import { faker } from '@faker-js/faker';
 
 let driver;
