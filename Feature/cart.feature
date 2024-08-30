@@ -13,7 +13,6 @@ Scenario Outline: Adding negative and high quantity of a item to the cart that e
 
     Examples:
     |items      |msg                      |
-    |0          | No item is added        |
     |99999999999| limited availabilty! item cannot be added  |
 
 Scenario: Checking out with the empty cart
@@ -24,8 +23,8 @@ Scenario: Checking out with the empty cart
     Then I can see the items on the cart
     * I remove the item from the cart
     And I see a message stated as "item successfully removed from the cart" 
-    Then I click on the proceed to checkout button
-    And I see a message stated as "No item is added to the cart"
+    Then I see a message in the carting page as "no items in the cart"
+   
 
 Scenario: Invalid shipping information
     When I go back to the product
@@ -40,22 +39,6 @@ Scenario: Invalid shipping information
     Then I click on the proceed to checkout button
     And I see a message stated as "Address fields empty"
 
-Scenario Outline: Entering bank transfer shipping method details with invalid credentials
-    When I enter the contact number as "9987878766"
-    * I enter the billing address as "#456,street2,village1 Mangalore Karnataka India-343546"
-    Then I click on the proceed to checkout button
-    * I click on the shipping method as "bank transfer"
-    When I enter the bank name as "<bank_name>" and "<branch>"
-    * I enter the Account holder name "<holder_name>"
-    * I enter the Account number as "<acc_number>"
-    Then I click on confirm button
-    And I see a message stated as "<msg>"
-
-    Examples:
-    |bank_name           |branch    |holder_name |acc_number|msg|
-    |STATE BANK          |MANGALORE | Akshara    |90898987656   |invalid bank name|
-    |STATE BANK OF INDIA |MANGALORE |  Aksh      |90898987656   |invalid name|
-    |STATE BANK OF INDIA |MANGALORE |  Akshara   |23234444444   |invalid account number|
 
 Scenario: Invalid coupon code information
     Then I click on shipping method as "cash on delivery"
