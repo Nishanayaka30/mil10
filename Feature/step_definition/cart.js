@@ -56,11 +56,7 @@ Then("I click on the cart button", async function(){
     await new Promise(resolve => setTimeout(resolve,1000));
 });
 
-//Then('I add the product to the cart', async function(){
-  //  await driver.wait(until.elementLocated(By.css('[data-testid="add-to-cart"]'))).click();
-    //await new Promise(resolve => setTimeout(resolve,1000));
 
-//});
 
 When("I click on the cart icon",async function(){
     await driver.wait(until.elementLocated(By.css('[data-testid="nav-cart"]'))).click();
