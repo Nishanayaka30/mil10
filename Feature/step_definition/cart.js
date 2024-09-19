@@ -147,7 +147,7 @@ Then("I should see the discount applied on the placed item",async function(){
     const original_price = Number(original_value); 
 
     const discountedprice = await placedItem.findElement(By.css('.new-price')); 
-    const discount_value = await discountedprice.getText('data-discount-price');
+    const discount_value = await discountedprice.getAttribute('data-discount-price');
     const newprice = Number(discount_value);
 
     expect(newprice).to.be.lessThan(original_price, 'Discounted price should be less than or equal to original price');
