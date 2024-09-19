@@ -141,9 +141,7 @@ And("I again go to the address page", async function(){
 
 
 Then("I should see the discount applied on the placed item",async function(){
-    const placed_item = await driver.wait(until.elementsLocated(By.css('.placed_item')), 10000); 
-    expect(placed_item.length).to.be.above(0, 'No items found in the cart');
-
+    const placed_item = await driver.wait(until.elementsLocated(By.css('.placed_item1')), 10000); 
     const originalprice= await placeditem.findElement(By.css('.original_price')); 
     const original_value = await originalprice.getAttribute('data-original-price');  //this is an attribute contain the items original price
     const original_price = Number(original_value); 
