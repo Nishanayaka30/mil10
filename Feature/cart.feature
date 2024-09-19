@@ -4,16 +4,14 @@ Scenario: Browsing a unknown product
     When I search a product "xyz"
     And I should see a message "product not found"
 
-Scenario Outline: Adding high quantity of a item to the cart that exceeds the availability
+Scenario: Adding high quantity of a item to the cart that exceeds the availability
     When I search a product "bottle"
     Then I click on a particular item
-    * I enter the number of product needed as "<items>"
+    * I enter the number of product needed as "999999999999999"
     * I click on the "cart" button
-    And I should see a message "<msg>"
+    And I should see a message "limited availabilty! item cannot be added"
 
-    Examples:
-    |items      |msg                      |
-    |99999999999| limited availabilty! item cannot be added  |
+   
 
 Scenario: Checking out with the empty cart
     When I search a product "bottle"
@@ -80,8 +78,10 @@ Scenario: placing a order with different address
     * I click on confirm button
     Then I'm on the review page
     * I should see the shipping and billing details
+     When I click on the coupon button
+    Then I enter the coupon code as "787yhhbhu8"
     When I click on confirm button
-    And I should see the review page with discount on the placed item
+    And I should see the discount applied on the placed item
     Then I click on place order button
     And I should see a message "Item placed successfully"
     

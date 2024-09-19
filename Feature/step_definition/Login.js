@@ -95,29 +95,29 @@ Then('I click on the {string} button',async function(reset){
 
 });
 
-Then('the system sends a GET request with the email address {string} to the password reset API', async function (email) {
-
-    try {
+After('@api', async function () {
+  try {
+      const email= "nisha@gmail.com";
       const response = await axios.get(`https://resetapi.com/request-reset?email=${email}`);
-      global.resetToken = response.data.token; 
-  
-      if (!global.resetToken) {
-        throw new Error('Password reset token was not received.');
-      }
-    } catch (error) {
-      throw new Error(`Failed to request password reset token: ${error.message}`);
-    }
-  });
+      this.resettkn = response.data.token; 
 
-  When('I navigate to the set new password page with the token', async function () {
-    if (!global.resetToken) {
-      throw new Error('Token not available to navigate to the set new password page.');
+    if (!this.resettkn) {
+      throw new Error('Password reset token was not received.');
     }
+  } catch (error) {
+    throw new Error(`Failed to request password reset token: ${error.message}`);
+  }
   
-    const url = `https://localhost:3000?token=${global.resetToken}`;
+ 
+});
+
+
+  When('I navigate to the set new password page', async function () {
+  
+    const url = `https://localhost:3000?token=${this.resettkn}`;
     await driver.get(url);
+
   });
-  
   
 
  When('I enter the new password as {string}',async function(newpass){
@@ -134,27 +134,12 @@ Then('the system sends a GET request with the email address {string} to the pass
 
  });
 
- After('@api', async function () {
-    try {
-      await axios.post('https://resetapi.com/reset-password', {
-        token: global.resetToken,
-        newPassword: 'Abc@987',
-      });
-      console.log('Cleanup: Password reset to the original state.');
-    } catch (error) {
-      console.error(`Cleanup failed: ${error.message}`);
-    }
-  
-    if (driver) {
-      await driver.quit();
-    }
-  });
 
 Then('I should see the home page', async function(){
     
-    driver.wait(until.elementLocated(By.css('img[src="../assets/img/barn-2400x1600.avif"]')),1000);
-    await new Promise(resolve => setTimeout(resolve,1000));
-
+  const searchbar= await driver.findElement(By.css('[data-testid="searchbar"]')); 
+  const displayed_searchbar = await searchbar.isDisplayed();
+  expect(displayed_searchbar).to.be.true;
 });
 
 

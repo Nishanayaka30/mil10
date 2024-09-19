@@ -18,9 +18,10 @@ Scenario Outline: Unsuccessfull login with incorrect credentials
     |abcd@g.com      |Abcd@123  | invalid email or password|
     |abcd@gmail.com  |abcd@123  | invalid email or password|
     |                |          | empty email and password |
-   
 
-Scenario: Creating a new password
+ 
+
+Scenario: Requesting a reset password link
     Given I'm on the home page
     When I click on signin
     Then I should see the login page
@@ -30,11 +31,11 @@ Scenario: Creating a new password
     And I should see the message "Password reset link has been sent to your email."
 
 @api
-Scenario: Setting a password 
-    When the system sends a GET request with the email address "nisha@gmail.com" to the password reset API
-    When I navigate to the set new password page with the token
+Scenario: successfully resetting the account password
+    When I navigate to the set new password page
     When I enter the new password as "Abc@987"
     Then I click on the Submit button
+    And I should see the message "resetting the password is successfull"
     Then I should see the login page
 
 Scenario: Successfull login with valid credentials

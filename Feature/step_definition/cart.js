@@ -51,6 +51,7 @@ Then('I enter the number of product needed as {string}', async function(number){
     await new Promise(resolve => setTimeout(resolve,1000));
 
 });
+
 Then("I click on the cart button", async function(){
     await driver.wait(until.elementLocated(By.css('[data-testid="cart"]'))).click();
     await new Promise(resolve => setTimeout(resolve,1000));
@@ -139,9 +140,19 @@ And("I again go to the address page", async function(){
 
 
 
-Then("I can see the review page with discount on the placed item",async function(){
+Then("I should see the discount applied on the placed item",async function(){
     const placed_item = await driver.wait(until.elementsLocated(By.css('.placed_item')), 10000); 
     expect(placed_item.length).to.be.above(0, 'No items found in the cart');
+
+    const originalprice= await placeditem.findElement(By.css('.original_price')); 
+    const original_value = await originalprice.getAttribute('data-original-price');  //this is an attribute contain the items original price
+    const original_price = Number(original_value); 
+
+    const discountedprice = await placedItem.findElement(By.css('.new-price')); 
+    const discount_value = await discountedprice.getText('data-discount-price');
+    const newprice = Number(discount_value);
+
+    expect(newprice).to.be.lessThan(original_price, 'Discounted price should be less than or equal to original price');
 
 });
 
