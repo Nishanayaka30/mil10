@@ -20,7 +20,7 @@ Scenario Outline: Unsuccessfull login with incorrect credentials
     |                |          | empty email and password |
 
  
-
+@api
 Scenario: Requesting a reset password link
     Given I'm on the home page
     When I click on signin
@@ -30,7 +30,7 @@ Scenario: Requesting a reset password link
     Then I click on the "Set New Password" button
     And I should see the message "Password reset link has been sent to your email."
 
-@api
+
 Scenario: successfully resetting the account password
     When I navigate to the set new password page
     When I enter the new password as "Abc@987"
